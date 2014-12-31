@@ -8,11 +8,12 @@ import java.lang.reflect.Field;
  * Time: 3:39 PM
  */
 public class Displayer {
-    public <E> String display(Object obj, E attribute) {
-        for(Field field : obj.getClass().getFields()) {
+    public static <E> String display(Object obj, E attribute) {
+        for(Field field : obj.getClass().getDeclaredFields()) {
             try {
-                if(field.get(this).equals(attribute)) {
-                    return field.getName()+": "+attribute.toString();
+                field.setAccessible(true);
+                if(field.get(obj).equals(attribute)) {
+                    return obj.getClass().getName()+"'s "+field.getName()+": "+attribute.toString();
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
