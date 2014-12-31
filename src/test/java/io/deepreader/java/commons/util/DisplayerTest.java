@@ -30,7 +30,7 @@ public class DisplayerTest extends TestCase {
         }
         P0 p = new P0();
         p.setCnt(7);
-        System.out.println(Displayer.display(p, p.getCnt()));
+        assert  Displayer.display(p, p.getCnt()).equals("io.deepreader.java.commons.util.DisplayerTest$1P0's cnt: 7");
         
     }
 }
