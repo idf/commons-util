@@ -25,26 +25,28 @@ public class Displayer {
     
     public static <K, V> String display(Map<K, V> map) {
         StringBuffer sb = new StringBuffer();
-        for (Map.Entry entry: map.entrySet()) {
+        for (Map.Entry<K, V> entry: map.entrySet()) {  // otherwise casting
             sb.append(entry.getKey().toString()+": "+entry.getValue().toString()+"\n");
         }
         return sb.toString();
     }
 
     public static String toString(Object aObject) {
-        StringBuilder result = new StringBuilder();
-        String newLine = System.getProperty("line.separator");
+        return toString(aObject, System.getProperty("line.separator"));
+    }
 
-        result.append( aObject.getClass().getName() );
+    public static String toString(Object aObject, String delimiter) {
+        StringBuilder result = new StringBuilder();
+        result.append( aObject.getClass().getName());
         result.append( " Object {" );
-        result.append(newLine);
+        result.append(delimiter);
 
         //determine fields declared in aObject class only (no fields of superclass)
         Field[] fields = aObject.getClass().getDeclaredFields();
 
         //print field names paired with their values
         for ( Field field : fields  ) {
-            result.append("  ");
+            result.append(" ");
             try {
                 field.setAccessible(true);
                 result.append( field.getName() );
@@ -54,7 +56,7 @@ public class Displayer {
             } catch ( IllegalAccessException ex ) {
                 System.out.println(ex);
             }
-            result.append(newLine);
+            result.append(delimiter);
         }
         result.append("}");
 
