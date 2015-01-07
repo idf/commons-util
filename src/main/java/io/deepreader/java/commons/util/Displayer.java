@@ -1,5 +1,7 @@
 package io.deepreader.java.commons.util;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.Map;
 
@@ -61,5 +63,11 @@ public class Displayer {
         result.append("}");
 
         return result.toString();
+    }
+
+    public static String display(Exception e){
+        StringWriter msg = new StringWriter();
+        e.printStackTrace(new PrintWriter(msg));
+        return msg.toString();
     }
 }
