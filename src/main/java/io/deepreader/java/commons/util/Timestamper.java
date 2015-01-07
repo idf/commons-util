@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
+ * TODO: decorator
  * User: Danyang
  * Date: 11/21/14
  * Time: 2:13 PM
@@ -20,5 +21,4 @@ public class Timestamper {
         System.out.println(new Timestamp(this.end));
         System.out.println("Elapsed: "+(this.end-this.start)+"ms");
     }
-
 }
