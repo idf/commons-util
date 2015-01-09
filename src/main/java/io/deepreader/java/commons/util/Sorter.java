@@ -19,18 +19,29 @@ public class Sorter {
         }
 
         /**
-         * this comparator imposes orderings that are inconsistent with equals.
+         * return 0 would merge keys.
+         * return 0 when keys are equal; otherwise never returns 0, indicating equality, causing the Map.get() method
+         * to not find matches.
+         *
+         * Catch the null pointer exception when calling .containsKey(K)
          * @param a
          * @param b
          * @return
          */
         @Override
         public int compare(K a, K b) {
-            if ((Integer) base.get(a)<(Integer) base.get(b)) {
-                return 1;
-            } else {
+            try {
+                if ((Integer) base.get(a)<(Integer) base.get(b))
+                    return 1;
+                else if(a.equals(b))
+                    return 0 ;
+                else
+                    return -1;
+            }
+            catch (NullPointerException e) {
                 return -1;
-            } // returning 0 would merge keys
+            }
+
         }
     }
 
