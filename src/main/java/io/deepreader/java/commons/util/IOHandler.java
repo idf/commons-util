@@ -1,6 +1,7 @@
 package io.deepreader.java.commons.util;
 
 import java.io.*;
+import java.util.function.Function;
 
 /**
  * User: Danyang
@@ -107,4 +108,18 @@ public class IOHandler {
         fileIn.close();
         return o;
     }
+
+    /**
+     * Template
+     */
+    // Template for catch error in lambda
+    private Function<BufferedReader, String> f =
+            (BufferedReader b) -> {
+                try {
+                    return b.readLine();
+                }
+                catch(IOException e) {
+                    throw new RuntimeException(e);
+                }
+            };
 }

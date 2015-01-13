@@ -1,5 +1,6 @@
 package io.deepreader.java.commons.util;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -32,7 +33,7 @@ public class Transformer {
     /**
      * source -> filter -> map -> consume
      * Equivalent to aggregate operations that accept Lambda expressions as parameters
-     * Local variables referenced from a lambda expression must be final or effectively final
+     * Local variables referenced from a lambda expression must be final or effectively final (FP Closure)
      *
      * <i>External Iteration</i> as compared to <i>Internal Iteration</i> using aggregate operations
      * @param source
@@ -63,5 +64,19 @@ public class Transformer {
         return mx;
     }
 
-
+    /**
+     * Constructor example:
+     * List<Integer> weights = Arrays.asList(7, 3, 4, 10);
+     * List<Apple> apples = map(weights, Apple::new);
+     * @param lst
+     * @param f
+     * @param <T>
+     * @param <R>
+     * @return
+     */
+    public static <T, R> List<R> transform(List<T> lst, Function<T, R> f) {
+        return lst.parallelStream()
+                .map(f)
+                .collect(Collectors.toList());
+    }
 }

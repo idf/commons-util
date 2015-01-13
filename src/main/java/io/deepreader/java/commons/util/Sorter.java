@@ -60,14 +60,6 @@ public class Sorter {
         return sortedMap;
     }
 
-    /**
-     * Template
-     */
-    private static <T extends Comparable> List<T> sort(List<T> l) {
-        l.sort((a, b) -> a.compareTo(b));
-        return l;
-    }
-
     public static <K, V> TreeMap<K, V> top(TreeMap<K, V> map, int k) {
         return top(map, k, map.comparator());
     }
@@ -105,4 +97,18 @@ public class Sorter {
         }
         return ret;
     }
+
+    /**
+     * Template
+     */
+    private static <T extends Comparable> List<T> sort(List<T> lst) {
+        lst.sort((a, b) -> a.compareTo(b));
+        return lst;
+    }
+
+    private static <T extends Comparable> List<T> sort2(List<T> lst) {
+        lst.sort(Comparator.comparing(Object::toString));
+        return lst;
+    }
+
 }
