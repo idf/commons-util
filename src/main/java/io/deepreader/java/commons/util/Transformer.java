@@ -1,6 +1,7 @@
 package io.deepreader.java.commons.util;
 
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class Transformer {
     /**
      * Template
+     * Fork -> Process -> Join
      * @param map
      * @param kp
      * @param vp
@@ -31,6 +33,8 @@ public class Transformer {
      * source -> filter -> map -> consume
      * Equivalent to aggregate operations that accept Lambda expressions as parameters
      * Local variables referenced from a lambda expression must be final or effectively final
+     *
+     * <i>External Iteration</i> as compared to <i>Internal Iteration</i> using aggregate operations
      * @param source
      * @param tester .test()
      * @param mapper .apply()
@@ -50,4 +54,14 @@ public class Transformer {
             }
         }
     }
+
+    /**
+     * Template
+     */
+    private static <K, V> Map<K, V> merge(Map<K, V> a, Map<K, V> mx, BiFunction<? super V, ? super V, ? extends V> remappingFunc) {
+        a.forEach((k, v) -> mx.merge(k, v, remappingFunc));
+        return mx;
+    }
+
+
 }

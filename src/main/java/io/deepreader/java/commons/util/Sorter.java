@@ -1,6 +1,7 @@
 package io.deepreader.java.commons.util;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -57,5 +58,51 @@ public class Sorter {
         TreeMap<K, V> sortedMap = new TreeMap<>(vc);
         sortedMap.putAll(map);
         return sortedMap;
+    }
+
+    /**
+     * Template
+     */
+    private static <T extends Comparable> List<T> sort(List<T> l) {
+        l.sort((a, b) -> a.compareTo(b));
+        return l;
+    }
+
+    public static <K, V> TreeMap<K, V> top(TreeMap<K, V> map, int k) {
+        return top(map, k, map.comparator());
+    }
+
+    public static <K, V> TreeMap<K, V> top(TreeMap<K, V> map, int k, Comparator<? super K> cmp) {
+        TreeMap<K, V> ret = new TreeMap<>(map.comparator());
+        int i = 0;
+        Map.Entry<K, V> kth = map.entrySet().iterator().next();
+        for(Map.Entry<K, V> e: map.entrySet()) {
+            i ++;
+            if(i==k)
+                kth = e;
+            else if(i>k) {
+                if(cmp.compare(kth.getKey(), e.getKey())!=0)
+                    break;
+            }
+            ret.put(e.getKey(), e.getValue());
+        }
+        return ret;
+    }
+
+    public static <K, V> TreeMap<K, V> topEntries(TreeMap<K, V> map, int k, Comparator<Map.Entry<K, V>> cmp) {
+        TreeMap<K, V> ret = new TreeMap<>(map.comparator());
+        int i = 0;
+        Map.Entry<K, V> kth = map.entrySet().iterator().next();
+        for(Map.Entry<K, V> e: map.entrySet()) {
+            i ++;
+            if(i==k)
+                kth = e;
+            else if(i>k) {
+                if(cmp.compare(kth, e)!=0)
+                    break;
+            }
+            ret.put(e.getKey(), e.getValue());
+        }
+        return ret;
     }
 }

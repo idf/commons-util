@@ -22,7 +22,7 @@ import java.util.Calendar;
  * Date: 1/11/2015
  * Time: 16:19
  */
-public class DateUtil {
+public class DateUtils {
     /**
      * Calendar objects are rather expensive: for heavy usage it's a good idea to use a single instance per thread
      * instead of calling Calendar.getInstance() multiple times. Calendar.getInstance() creates a new instance each
