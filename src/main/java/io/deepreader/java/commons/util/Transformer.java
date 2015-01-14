@@ -1,5 +1,6 @@
 package io.deepreader.java.commons.util;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -17,6 +18,8 @@ public class Transformer {
     /**
      * Template
      * Fork -> Process -> Join
+     * Notice that parallelStream has much more overhead than stream.
+     * Method reference increases level of encapsulation
      * @param map
      * @param kp
      * @param vp
@@ -27,7 +30,7 @@ public class Transformer {
     private static <K, V> Map<K, V> transform(Map<K, V> map, Function<K, K> kp, Function<V, V> vp) {
         return map.entrySet()
                 .parallelStream()
-                .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     /**
@@ -77,6 +80,33 @@ public class Transformer {
     public static <T, R> List<R> transform(List<T> lst, Function<T, R> f) {
         return lst.parallelStream()
                 .map(f)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Flat a stream
+     * @param words
+     * @return
+     */
+    public static List<String> flatString(List<String> words) {
+        return words.parallelStream()
+                .map(elt -> elt.split(""))
+                .flatMap(Arrays::stream)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * TODO: replace Object[]
+     * @param lstA
+     * @param lstB
+     * @param <T>
+     * @return
+     */
+    public static <T> List<Object[]> pair(List<T> lstA, List<T> lstB) {
+        return lstA.parallelStream()
+                .flatMap(i -> lstB.parallelStream()
+                                .map(j -> new Object[] {i, j})
+                                )
                 .collect(Collectors.toList());
     }
 }

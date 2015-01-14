@@ -102,7 +102,7 @@ public class Sorter {
      * Template
      */
     private static <T extends Comparable> List<T> sort(List<T> lst) {
-        lst.sort((a, b) -> a.compareTo(b));
+        lst.sort(Comparable::compareTo);
         return lst;
     }
 
