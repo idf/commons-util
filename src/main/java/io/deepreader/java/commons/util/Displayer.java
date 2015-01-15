@@ -55,8 +55,8 @@ public class Displayer {
                 result.append(": ");
                 //requires access to private field:
                 result.append( field.get(aObject) );
-            } catch ( IllegalAccessException ex ) {
-                System.out.println(ex);
+            } catch (IllegalAccessException e) {
+                System.out.println(e);
             }
             result.append(delimiter);
         }
@@ -69,5 +69,24 @@ public class Displayer {
         StringWriter msg = new StringWriter();
         e.printStackTrace(new PrintWriter(msg));
         return msg.toString();
+    }
+
+    public static String display(int[][] mat) {
+        return display(mat, Integer.MAX_VALUE, Integer.MAX_VALUE);
+    }
+
+    public static String display(int[][] mat, int row_limit, int col_limit) {
+        StringBuffer sb = new StringBuffer();
+        int m = mat.length;
+        if(m==0)
+            return null;
+        int n = mat[0].length;
+        for(int i=0; i<Math.min(m, row_limit); i++) {
+            for(int j=0; j<Math.min(n, col_limit); j++) {
+                sb.append(mat[i][j]+" ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

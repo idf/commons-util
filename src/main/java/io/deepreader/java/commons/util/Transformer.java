@@ -30,7 +30,7 @@ public class Transformer {
     private static <K, V> Map<K, V> transform(Map<K, V> map, Function<K, K> kp, Function<V, V> vp) {
         return map.entrySet()
                 .parallelStream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.toConcurrentMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     /**

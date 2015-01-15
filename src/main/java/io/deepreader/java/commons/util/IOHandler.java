@@ -1,7 +1,12 @@
 package io.deepreader.java.commons.util;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * User: Danyang
@@ -107,6 +112,17 @@ public class IOHandler {
         in.close();
         fileIn.close();
         return o;
+    }
+
+    public static Stream<String> getLines(String path) throws IOException {
+        return Files.lines(Paths.get(path), Charset.defaultCharset());
+    }
+
+    public static long wordCnt(String path) throws IOException {
+        Stream<String> lines = getLines(path);
+        return lines.flatMap(line -> Arrays.stream(line.split(" ")))
+                .distinct()
+                .count();
     }
 
     /**
