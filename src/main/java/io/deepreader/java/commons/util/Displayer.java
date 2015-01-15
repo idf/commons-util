@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * User: Danyang
@@ -26,11 +27,13 @@ public class Displayer {
     }
     
     public static <K, V> String display(Map<K, V> map) {
-        StringBuffer sb = new StringBuffer();
-        for (Map.Entry<K, V> entry: map.entrySet()) {  // otherwise casting
-            sb.append(entry.getKey().toString()+": "+entry.getValue().toString()+"\n");
-        }
-        return sb.toString();
+        return display(map, ": ", "\n");
+    }
+
+    public static <K, V> String display(Map<K, V> map, String between, String delimiter) {
+        return map.entrySet().stream()
+                .map(e -> e.getKey().toString()+between+e.getValue().toString())
+                .collect(Collectors.joining(delimiter));
     }
 
     public static String toString(Object aObject) {
