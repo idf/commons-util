@@ -79,17 +79,19 @@ public class Displayer {
     }
 
     public static String display(int[][] mat, int row_limit, int col_limit) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();  // faster than StringBuffer
         int m = mat.length;
         if(m==0)
             return null;
         int n = mat[0].length;
         for(int i=0; i<Math.min(m, row_limit); i++) {
             for(int j=0; j<Math.min(n, col_limit); j++) {
-                sb.append(mat[i][j]+" ");
+                sb.append(mat[i][j]);
+                if(j!=Math.min(n, col_limit)-1)
+                    sb.append(" ");  // you need join instead
             }
             sb.append("\n");
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }
