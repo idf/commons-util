@@ -1,13 +1,13 @@
 package io.deepreader.java.commons.util;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * User: Danyang
@@ -108,5 +108,37 @@ public class Transformer {
                                 .map(j -> new Object[] {i, j})
                                 )
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Group the indexes of the elements by each element's value.
+     * http://stackoverflow.com/questions/27980488/java-8-stream-of-integer-grouping-indexes-of-a-stream-by-the-integers
+     * @param nums
+     * @return
+     */
+    public static <T> Map<T, List<Integer>> groupListToMap(List<T> nums) {
+        return IntStream.range(0, nums.size())
+                .boxed()
+                .parallel()
+                .collect(Collectors.groupingBy(nums::get));
+    }
+
+    /**
+     * Group the indexes of the elements by each element's value
+     * @param nums
+     * @param <T>
+     * @return
+     */
+    public static <T> Map<T, List<Integer>> groupListToMap(Stream<T> nums) {
+        PrimitiveIterator.OfInt indexes = IntStream.iterate(0, x -> x + 1).iterator();
+        Map<T, List<Integer>> result = new HashMap<>();
+
+        nums.iterator().forEachRemaining(i -> result.merge(i,
+                        new ArrayList<>(Arrays.asList(indexes.next())),
+                        (l1, l2) -> {l1.addAll(l2); return l1;}
+                )
+        );
+
+        return result;
     }
 }
