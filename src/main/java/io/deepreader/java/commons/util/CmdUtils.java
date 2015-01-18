@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
  */
 public class CmdUtils {
     public static void exec(String cmd) throws IOException {
+        System.out.println("Executing: ");
+        System.out.println(cmd);
         Process process = Runtime.getRuntime().exec(cmd);
 
         BufferedReader stdout = new BufferedReader(

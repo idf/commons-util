@@ -14,11 +14,16 @@ import java.util.stream.Stream;
  * Time: 16:20
  */
 public class IOHandler {
-    public static String read(String fileName){
+    /**
+     * Read all from files
+     * @param path path to file
+     * @return content of the file
+     */
+    public static String read(String path){
         String returnValue = "";
         FileReader fileReader = null;
         try{
-            fileReader = new FileReader(fileName);
+            fileReader = new FileReader(path);
             BufferedReader buffReader = new BufferedReader(fileReader);
             String line = "";
             while((line = buffReader.readLine())!=null){
@@ -41,7 +46,12 @@ public class IOHandler {
         return returnValue;
     }
 
-    public static String readline(InputStream in){
+    /**
+     * read a line from InputStream
+     * @param in input stream
+     * @return a line from the stream
+     */
+    public static String readLine(InputStream in){
         String returnValue = "";
         InputStreamReader inputStremReader = null;
         try{
@@ -53,26 +63,21 @@ public class IOHandler {
         catch(Exception e){
             throw new RuntimeException(e);
         }
-        /* Do not close the stream
-         finally{
-            if(inputStremReader!=null)
-                try{
-                    inputStremReader.close();
-                }
-                catch(IOException e){
-                    System.out.println(e.getMessage());
-                }
-        }
-         */
         return returnValue;
 
     }
 
-    public static boolean write(String fileName, String content){
+    /**
+     * Write the content to a file
+     * @param path path to a file
+     * @param content content to write
+     * @return whether success or not
+     */
+    public static boolean write(String path, String content){
         FileWriter fileWriter = null;
         boolean flag = false;
         try{
-            fileWriter = new FileWriter(fileName);
+            fileWriter = new FileWriter(path);
             BufferedWriter buffWriter = new BufferedWriter(fileWriter);
             buffWriter.write(content);
             buffWriter.close();
@@ -95,7 +100,12 @@ public class IOHandler {
         return flag;
     }
 
-
+    /**
+     * serialization
+     * @param path path to file
+     * @param obj obj to be serialized
+     * @throws IOException
+     */
     public static void serialize(String path, Serializable obj) throws IOException {
         FileOutputStream fileOut = new FileOutputStream(path);
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -104,6 +114,13 @@ public class IOHandler {
         fileOut.close();
     }
 
+    /**
+     * de-serialization
+     * @param path path to file
+     * @return obj de-serialized
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static Object deserialize(String path) throws IOException, ClassNotFoundException {
         Object o;
         FileInputStream fileIn = new FileInputStream(path);
@@ -114,16 +131,40 @@ public class IOHandler {
         return o;
     }
 
+    /**
+     * get lines stream
+     * @param path path to a file
+     * @return stream of lines
+     * @throws IOException
+     */
     public static Stream<String> getLines(String path) throws IOException {
         return Files.lines(Paths.get(path), Charset.defaultCharset());
     }
 
+    /**
+     * Count number of words, separated by " "
+     * @param path path to file
+     * @return word count
+     * @throws IOException
+     */
     public static long wordCnt(String path) throws IOException {
         Stream<String> lines = getLines(path);
         return lines.flatMap(line -> Arrays.stream(line.split(" ")))
                 .distinct()
                 .count();
     }
+
+
+    public static void safeClose(Closeable c) {
+        if (c!=null) {
+            try {
+                c.close();
+            } catch (IOException e) {
+                // Silent
+            }
+        }
+    }
+
 
     /**
      * Template
