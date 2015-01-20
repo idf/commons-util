@@ -1,5 +1,6 @@
 package io.deepreader.java.commons.util;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,5 +12,11 @@ import java.util.stream.Collectors;
 public class StringUtils {
     public static String join(List<String> lst, String delimiter) {
         return lst.stream().collect(Collectors.joining(delimiter));
+    }
+
+    public static String sort(String s) {
+        char [] cs = s.toCharArray();
+        Arrays.sort(cs);
+        return new String(cs);
     }
 }
