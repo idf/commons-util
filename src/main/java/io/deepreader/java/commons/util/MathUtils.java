@@ -107,4 +107,7 @@ public class MathUtils {
                 .collect(new PrimeNumbersCollector());
     }
 
+    public static int sum(List<Integer> lst) {
+        return lst.stream().mapToInt(e->e).sum();
+    }
 }
