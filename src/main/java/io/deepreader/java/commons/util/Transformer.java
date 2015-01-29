@@ -141,4 +141,14 @@ public class Transformer {
 
         return result;
     }
+
+    /**
+     * Group the list of T and show their counts
+     * @param s
+     * @param <T>
+     * @return
+     */
+    public static <T> Map<T, Long> groupAndCount(Stream<T> s) {
+        return s.collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+    }
 }
