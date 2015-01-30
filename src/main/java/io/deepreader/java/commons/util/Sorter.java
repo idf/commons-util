@@ -42,7 +42,6 @@ public class Sorter {
             catch (NullPointerException e) {
                 return -1;
             }
-
         }
     }
 
@@ -84,13 +83,13 @@ public class Sorter {
     public static <K, V> TreeMap<K, V> topEntries(TreeMap<K, V> map, int k, Comparator<Map.Entry<K, V>> cmp) {
         TreeMap<K, V> ret = new TreeMap<>(map.comparator());
         int i = 0;
-        Map.Entry<K, V> kth = map.entrySet().iterator().next();
+        Map.Entry<K, V> kthEntry = map.entrySet().iterator().next();
         for(Map.Entry<K, V> e: map.entrySet()) {
-            i ++;
+            i++;
             if(i==k)
-                kth = e;
+                kthEntry = e;
             else if(i>k) {
-                if(cmp.compare(kth, e)!=0)
+                if(cmp.compare(kthEntry, e)!=0)
                     break;
             }
             ret.put(e.getKey(), e.getValue());
