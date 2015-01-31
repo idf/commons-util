@@ -12,7 +12,7 @@
     <name>commons-util</name>
     <url>http://maven.apache.org</url>
     <build>
-        <finalName>km-lucene</finalName>
+        <finalName>commons-util</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -33,7 +33,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-            <scope>test</scope>
+            <scope>test</scope>  <!-- you need sub folder -->
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
