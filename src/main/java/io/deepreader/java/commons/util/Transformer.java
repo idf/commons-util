@@ -116,7 +116,7 @@ public class Transformer {
      * @param nums
      * @return
      */
-    public static <T> Map<T, List<Integer>> groupListToMap(List<T> nums) {
+    public static <T> Map<T, List<Integer>> groupListIndexByValue(List<T> nums) {
         return IntStream.range(0, nums.size())
                 .boxed()
                 .parallel()

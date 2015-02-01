@@ -1,9 +1,6 @@
 package io.deepreader.java.commons.util;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * by LinkedList: http://www.leveluplunch.com/java/examples/sort-order-map-by-values/
@@ -83,7 +80,8 @@ public class Sorter {
     public static <K, V> TreeMap<K, V> topEntries(TreeMap<K, V> map, int k, Comparator<Map.Entry<K, V>> cmp) {
         TreeMap<K, V> ret = new TreeMap<>(map.comparator());
         int i = 0;
-        Map.Entry<K, V> kthEntry = map.entrySet().iterator().next();
+
+        Map.Entry<K, V> kthEntry = null;
         for(Map.Entry<K, V> e: map.entrySet()) {
             i++;
             if(i==k)
