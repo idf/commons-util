@@ -12,14 +12,23 @@ public class Timestamper {
     private long start;
     private long end;
 
-    public void start() {
-        this.start = new Date().getTime();
+    public void loudStart() {
+        this.start();
         System.out.println("Timestamper started: "+new Timestamp(this.start));
     }
 
-    public void end() {
-        this.end = new Date().getTime();
+    public void loudEnd() {
+        String elapse = this.end();
         System.out.println("Timestamper completed: "+new Timestamp(this.end));
-        System.out.println("Elapsed: "+(this.end-this.start)+"ms");
+        System.out.println("Elapsed: "+elapse+"ms");
+    }
+
+    public void start() {
+        this.start = new Date().getTime();
+    }
+
+    public String end() {
+        this.end = new Date().getTime();
+        return ""+(this.end-this.start);
     }
 }
