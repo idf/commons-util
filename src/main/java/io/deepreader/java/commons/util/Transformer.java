@@ -181,4 +181,30 @@ public class Transformer {
                 itr.remove();
         }
     }
+
+    /**
+     * Flatten map's value to a list
+     * @param map must be sorted
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    public static <K, V> List<V> toList(SortedMap<K, V>map) {
+        return map.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Flatten map's value to a list. Order is not guaranteed
+     * @param map generic
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    public static <K, V> List<V> toList(Map<K, V> map) {
+        return map.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+    }
 }
