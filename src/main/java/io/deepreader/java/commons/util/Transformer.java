@@ -151,4 +151,35 @@ public class Transformer {
     public static <T> Map<T, Long> groupAndCount(Stream<T> s) {
         return s.collect(Collectors.groupingBy(e -> e, Collectors.counting()));
     }
+
+    /**
+     * Remove an entry from a map by key
+     * @param map the targeting map
+     * @param test predicate
+     * @param <K>
+     * @param <V>
+     */
+    public static <K, V> void removeByKey(Map<K, V> map, Predicate<K> test) {
+        Iterator<K> itr = map.keySet().iterator();
+        while(itr.hasNext()) {
+            if(test.test(itr.next()))
+                itr.remove();
+        }
+    }
+
+    /**
+     * Remove an entry from a map by value
+     * @param map the targeting map
+     * @param test predicate
+     * @param <K>
+     * @param <V>
+     */
+    public static <K, V> void removeByValue(Map<K, V> map, Predicate<V> test) {
+        Iterator<V> itr = map.values().iterator();
+        while (itr.hasNext()) {
+            if(test.test(itr.next()))
+                itr.remove();
+        }
+
+    }
 }
