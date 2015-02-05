@@ -36,6 +36,10 @@ public class Displayer {
                 .collect(Collectors.joining(delimiter));
     }
 
+    public static <K, V> void outPrintln(Map<K, V> map) {
+        map.entrySet().forEach(e -> System.out.println(e.getKey()+": "+e.getValue()));
+    }
+
     public static String toString(Object aObject) {
         return toString(aObject, System.getProperty("line.separator"));
     }
