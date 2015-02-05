@@ -155,14 +155,14 @@ public class Transformer {
     /**
      * Remove an entry from a map by key
      * @param map the targeting map
-     * @param test predicate
+     * @param tester predicate
      * @param <K>
      * @param <V>
      */
-    public static <K, V> void removeByKey(Map<K, V> map, Predicate<K> test) {
+    public static <K, V> void removeByKey(Map<K, V> map, Predicate<K> tester) {
         Iterator<K> itr = map.keySet().iterator();
         while(itr.hasNext()) {
-            if(test.test(itr.next()))
+            if(tester.test(itr.next()))
                 itr.remove();
         }
     }
@@ -170,16 +170,15 @@ public class Transformer {
     /**
      * Remove an entry from a map by value
      * @param map the targeting map
-     * @param test predicate
+     * @param tester predicate
      * @param <K>
      * @param <V>
      */
-    public static <K, V> void removeByValue(Map<K, V> map, Predicate<V> test) {
+    public static <K, V> void removeByValue(Map<K, V> map, Predicate<V> tester) {
         Iterator<V> itr = map.values().iterator();
         while (itr.hasNext()) {
-            if(test.test(itr.next()))
+            if(tester.test(itr.next()))
                 itr.remove();
         }
-
     }
 }
