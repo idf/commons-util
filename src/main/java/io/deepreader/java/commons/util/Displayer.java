@@ -26,17 +26,17 @@ public class Displayer {
         return "Error accessing attribute";
     }
     
-    public static <K, V> String display(Map<K, V> map) {
+    public static String display(Map<?, ?> map) {
         return display(map, ": ", "\n");
     }
 
-    public static <K, V> String display(Map<K, V> map, String between, String delimiter) {
+    public static  String display(Map<?, ?> map, String between, String delimiter) {
         return map.entrySet().stream()
-                .map(e -> e.getKey().toString()+between+e.getValue().toString())
+                .map(e -> e.getKey()+between+e.getValue())
                 .collect(Collectors.joining(delimiter));
     }
 
-    public static <K, V> void outPrintln(Map<K, V> map) {
+    public static void outPrintln(Map<?, ?> map) {
         map.entrySet().forEach(e -> System.out.println(e.getKey()+": "+e.getValue()));
     }
 
