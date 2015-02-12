@@ -80,11 +80,10 @@ public class Sorter {
     public static <T extends TreeMap<K, V>, K, V> T topEntries(T map, int k, Comparator<Map.Entry<K, V>> cmp) {
         T ret = (T) map.clone();
         ret.clear();
-        Set<Map.Entry<K, V>> entries = map.entrySet();
 
         int i = 0;
         Map.Entry<K, V> kthEntry = null;
-        for(Map.Entry<K, V> e: entries) {
+        for(Map.Entry<K, V> e: map.entrySet()) {
             i++;
             if(i==k)
                 kthEntry = e;
