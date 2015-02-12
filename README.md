@@ -2,7 +2,7 @@ commons-util
 ============
 
 Common functions for Java.  
-Don't Repeat Yourself (DRY) principle   
+Life is short; don't repeat yourself.  
 
 #Langauge Level
 Java 8 required
