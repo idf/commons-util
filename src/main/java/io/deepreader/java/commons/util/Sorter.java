@@ -50,10 +50,33 @@ public class Sorter {
      * @param <V>
      * @return
      */
-    public static <K, V> TreeMap<K, V> sortByValues(Map<K, V>map, ValueComparator<K, V> vc) {
+    public static <K, V> TreeMap<K, V> sortByValue(Map<K, V> map, ValueComparator<K, V> vc) {
         TreeMap<K, V> sortedMap = new TreeMap<>(vc);
         sortedMap.putAll(map);
         return sortedMap;
+    }
+
+    /**
+     * LinkedHashMap implementation
+     * @param map
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    public static <K, V extends Comparable<V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> lst = new LinkedList<>(map.entrySet());
+        Collections.sort(lst, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+        Map<K, V> ret = new LinkedHashMap<>();
+        for(Map.Entry<K, V> e: lst) ret.put(e.getKey(), e.getValue());
+        return ret;
+    }
+
+    public static <K extends Comparable<K>, V> Map<K, V> sortByKey(Map<K, V> map) {
+        List<Map.Entry<K, V>> lst = new LinkedList<>(map.entrySet());
+        Collections.sort(lst, (o1, o2) -> o1.getKey().compareTo(o2.getKey()));
+        Map<K, V> ret = new LinkedHashMap<>();
+        for(Map.Entry<K, V> e: lst) ret.put(e.getKey(), e.getValue());
+        return ret;
     }
 
     public static <K, V> TreeMap<K, V> top(TreeMap<K, V> map, int k) {

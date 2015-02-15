@@ -42,18 +42,17 @@ public class SorterTest extends TestCase {
         map.put("c", 1);
         map.put("b", 2);
         map.put("a", 3);
-        TreeMap<String, Integer> ret = Sorter.sortByValues(map, new Sorter.ValueComparator<String, Integer>(map) {
+        TreeMap<String, Integer> ret = Sorter.sortByValue(map, new Sorter.ValueComparator<String, Integer>(map) {
             @Override
             public int compare(String a, String b) {
                 try {
                     if (base.get(a) < base.get(b))
                         return 1;
-                    else if(a.equals(b))
-                        return 0 ;
+                    else if (a.equals(b))
+                        return 0;
                     else
                         return -1;
-                }
-                catch (NullPointerException e) {
+                } catch (NullPointerException e) {
                     return -1;
                 }
             }
