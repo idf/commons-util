@@ -18,9 +18,9 @@ public class GeneratorTest {
 
     @Test
     public void testRun() throws Exception {
-        Generator<Integer> simpleGenerator = new Generator<Integer>() {
+        Generator<Integer, Integer> simpleGenerator = new Generator<Integer, Integer>(100) {
             public void run() throws InterruptedException {
-               for(int i=0; i<100; i++) {
+               for(int i=0; i<this.in; i++) {
                    yield(i);
                }
             }

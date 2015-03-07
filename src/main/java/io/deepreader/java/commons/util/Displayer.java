@@ -45,7 +45,7 @@ public class Displayer {
     }
 
     public static String toString(Object aObject, String delimiter) {
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder();  // faster than StringBuffer
         result.append( aObject.getClass().getName());
         result.append( " Object {" );
         result.append(delimiter);

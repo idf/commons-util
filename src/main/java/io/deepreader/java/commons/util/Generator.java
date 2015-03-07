@@ -9,7 +9,11 @@ import java.util.NoSuchElementException;
  *
  * http://stackoverflow.com/questions/11570132/generator-functions-equivalent-in-java
  */
-public abstract class Generator<T> implements Iterable<T> {
+public abstract class Generator<T, R> implements Iterable<R> {
+    protected T in;
+    public Generator(T in) {
+        this.in = in;
+    }
 
     private class Condition {
         private boolean isSet;
@@ -34,19 +38,19 @@ public abstract class Generator<T> implements Iterable<T> {
     private boolean hasFinished;
     private final Condition itemAvailableOrHasFinished = new Condition();
     private final Condition itemRequested = new Condition();
-    private T nextItem;
+    private R nextItem;
     private boolean nextItemAvailable;
 
     @Override
-    public Iterator<T> iterator() {
-        return new Iterator<T>() {
+    public Iterator<R> iterator() {
+        return new Iterator<R>() {
             @Override
             public boolean hasNext() {
                 waitForNext();
                 return !hasFinished;
             }
             @Override
-            public T next() {
+            public R next() {
                 waitForNext();
                 if (hasFinished)
                     throw new NoSuchElementException();
@@ -74,7 +78,7 @@ public abstract class Generator<T> implements Iterable<T> {
 
     protected abstract void run() throws InterruptedException;
 
-    protected void yield(T element) throws InterruptedException {
+    protected void yield(R element) throws InterruptedException {
         nextItem = element;
         nextItemAvailable = true;
         itemAvailableOrHasFinished.set();
