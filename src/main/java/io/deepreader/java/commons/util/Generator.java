@@ -85,19 +85,16 @@ public abstract class Generator<T> implements Iterable<T> {
         assert producer == null;
         if (THREAD_GROUP == null)
             THREAD_GROUP = new ThreadGroup("generators");
-        producer = new Thread(THREAD_GROUP, new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    itemRequested.await();
-                    Generator.this.run();
-                } catch (InterruptedException e) {
-                    // No need to do anything here; Remaining steps in run()
-                    // will cleanly shut down the thread.
-                }
-                hasFinished = true;
-                itemAvailableOrHasFinished.set();
+        producer = new Thread(THREAD_GROUP, () -> {
+            try {
+                itemRequested.await();
+                Generator.this.run();
+            } catch (InterruptedException e) {
+                // No need to do anything here; Remaining steps in run()
+                // will cleanly shut down the thread.
             }
+            hasFinished = true;
+            itemAvailableOrHasFinished.set();
         });
         producer.setDaemon(true);
         producer.start();
