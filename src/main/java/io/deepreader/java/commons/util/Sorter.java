@@ -119,6 +119,21 @@ public class Sorter {
         return ret;
     }
 
+    public static <T extends TreeMap<K, V>, K, V> T topEntries(T map, int k) {
+        T ret = (T) map.clone();
+        ret.clear();
+
+        int i = 0;
+        for(Map.Entry<K, V> e: map.entrySet()) {
+            i++;
+            if(i>k) {
+                break;
+            }
+            ret.put(e.getKey(), e.getValue());
+        }
+        return ret;
+    }
+
     /**
      * Template
      */
