@@ -1,5 +1,7 @@
 package io.deepreader.java.commons.util;
 
+import org.apache.commons.lang3.time.StopWatch;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -30,5 +32,25 @@ public class Timestamper {
     public String end() {
         this.end = new Date().getTime();
         return ""+(this.end-this.start);
+    }
+
+    public long getStart() {
+        return start;
+    }
+
+    public long getEnd() {
+        return end;
+    }
+
+    /**
+     * Example of using apache timer
+     * @return
+     */
+    private long stopWatch() {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        System.out.println("Initialize stopwatch");
+        stopWatch.split();
+        return stopWatch.getSplitTime();
     }
 }

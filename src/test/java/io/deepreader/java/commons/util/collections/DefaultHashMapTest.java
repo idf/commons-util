@@ -7,7 +7,6 @@ import org.junit.Test;
  * Created by Daniel on 17/06/15.
  */
 public class DefaultHashMapTest extends TestCase {
-
     @Test
     public void testGet() throws Exception {
         DefaultHashMap<Integer, Integer> d = new DefaultHashMap<>(0);

@@ -19,10 +19,10 @@ public class IOHandler {
      * @param path path to file
      * @return content of the file
      */
-    public static String read(String path){
+    public static String read(String path) {
         String returnValue = "";
         FileReader fileReader = null;
-        try{
+        try {
             fileReader = new FileReader(path);
             BufferedReader buffReader = new BufferedReader(fileReader);
             String line = "";
@@ -33,7 +33,7 @@ public class IOHandler {
         catch(Exception e){
             throw new RuntimeException(e);
         }
-        finally{
+        finally {
             if(fileReader!=null)
                 try{
                     fileReader.close();
@@ -51,16 +51,16 @@ public class IOHandler {
      * @param in input stream
      * @return a line from the stream
      */
-    public static String readLine(InputStream in){
+    public static String readLine(InputStream in) {
         String returnValue = "";
         InputStreamReader inputStremReader = null;
-        try{
+        try {
             inputStremReader = new InputStreamReader(in);
             BufferedReader buffReader = new BufferedReader(inputStremReader);
             String line = buffReader.readLine();
             returnValue = line;
         }
-        catch(Exception e){
+        catch(Exception e) {
             throw new RuntimeException(e);
         }
         return returnValue;
@@ -73,26 +73,26 @@ public class IOHandler {
      * @param content content to write
      * @return whether success or not
      */
-    public static boolean write(String path, String content){
+    public static boolean write(String path, String content) {
         FileWriter fileWriter = null;
         boolean flag = false;
-        try{
+        try {
             fileWriter = new FileWriter(path);
             BufferedWriter buffWriter = new BufferedWriter(fileWriter);
             buffWriter.write(content);
             buffWriter.close();
             flag=true;
         }
-        catch(Exception e){
+        catch(Exception e) {
             throw new RuntimeException(e);
         }
-        finally{
-            if(fileWriter!=null){
-                try{
+        finally {
+            if(fileWriter!=null) {
+                try {
 
                     fileWriter.close();
                 }
-                catch(IOException e){
+                catch(IOException e) {
                     System.out.println(e.getMessage());
                 }
             }
