@@ -1,6 +1,7 @@
 package io.deepreader.java.commons.util;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -165,6 +166,44 @@ public class IOHandler {
         }
     }
 
+    /**
+     * Read file from resources folder. Use URI instead of string path to avoid special character issue
+     * @param classLoader
+     * @param path
+     * @return
+     * @throws URISyntaxException
+     */
+    public static File getResourcesFile(ClassLoader classLoader, String path) throws URISyntaxException {
+        return new File(classLoader.getResource(path).toURI());
+    }
+
+    public static BufferedReader toBufferedReader(FileReader reader) {
+        return new BufferedReader(reader);
+    }
+
+    public static BufferedReader toBufferedReader(File f) throws FileNotFoundException {
+        return toBufferedReader(new FileReader(f));
+    }
+
+    public static BufferedReader toBufferedReader(String path) throws FileNotFoundException {
+        return toBufferedReader(new File(path));
+    }
+
+    public static BufferedReader toBufferedReader(InputStreamReader reader) {
+        return new BufferedReader(reader);
+    }
+
+    public static BufferedReader toBufferedReader(InputStream in) {
+        return toBufferedReader(new InputStreamReader(in));
+    }
+
+    public static BufferedWriter toBufferedWriter(FileWriter writer) {
+        return new BufferedWriter(writer);
+    }
+
+    public static BufferedWriter toBufferedWriter(String path) throws IOException {
+        return toBufferedWriter(new FileWriter(path));
+    }
 
     /**
      * Template
