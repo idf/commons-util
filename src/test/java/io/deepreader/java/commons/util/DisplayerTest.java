@@ -15,7 +15,7 @@ public class DisplayerTest extends TestCase {
     public void tearDown() throws Exception {
 
     }
-    
+
     public void testDisplay() throws Exception {
         class P0 {
             private Integer cnt;
@@ -31,6 +31,10 @@ public class DisplayerTest extends TestCase {
         P0 p = new P0();
         p.setCnt(7);
         assertTrue(Displayer.display(p, p.getCnt()).equals("io.deepreader.java.commons.util.DisplayerTest$1P0's cnt: 7"));
-        
+    }
+
+    public void testGreekLetter() throws Exception {
+        int å = 1;
+        assertTrue(å == 1);
     }
 }
