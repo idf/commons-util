@@ -33,8 +33,10 @@ public class DisplayerTest extends TestCase {
         assertTrue(Displayer.display(p, p.getCnt()).equals("io.deepreader.java.commons.util.DisplayerTest$1P0's cnt: 7"));
     }
 
-    public void testGreekLetter() throws Exception {
+    public void testUnicodeVariable() throws Exception {
         int å = 1;
         assertTrue(å == 1);
+        int 中文 = 1;
+        assertTrue (中文 == 1);
     }
 }
