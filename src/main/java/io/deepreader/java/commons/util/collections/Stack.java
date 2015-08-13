@@ -123,11 +123,12 @@ public class Stack<Item> implements Iterable<Item> {
         return s.toString();
     }
 
-
+    // Iterator Sample
     /**
      * Returns an iterator to this stack that iterates through the items in LIFO order.
      * @return an iterator to this stack that iterates through the items in LIFO order.
      */
+    @Override
     public Iterator<Item> iterator() {
         return new ListIterator<Item>(first);
     }
@@ -139,9 +140,14 @@ public class Stack<Item> implements Iterable<Item> {
         public ListIterator(Node<Item> first) {
             current = first;
         }
+
+        @Override
         public boolean hasNext()  { return current != null;                     }
+
+        @Override
         public void remove()      { throw new UnsupportedOperationException();  }
 
+        @Override
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
             Item item = current.item;
