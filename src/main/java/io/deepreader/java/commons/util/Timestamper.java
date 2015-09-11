@@ -2,6 +2,8 @@ package io.deepreader.java.commons.util;
 
 import org.apache.commons.lang3.time.StopWatch;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -25,6 +27,9 @@ public class Timestamper {
         System.out.println("Elapsed: "+elapse+"ms");
     }
 
+    /**
+     * "Wall clock time" is the real-world elapsed time experienced by a user waiting for a task to complete.
+     */
     public void start() {
         this.start = new Date().getTime();
     }
@@ -52,5 +57,33 @@ public class Timestamper {
         System.out.println("Initialize stopwatch");
         stopWatch.split();
         return stopWatch.getSplitTime();
+    }
+
+    /**
+     * Timing a single-threaded task using CPU, system, and user time
+     *
+     * "User time" is the time spent running your application's own code.
+     * "System time" is the time spent running OS code on behalf of your application (such as for I/O).
+     * "CPU time" is user time plus system time. It's the total time spent using a CPU for your application.
+     */
+    /** Get CPU time in nanoseconds. */
+    public long getCpuTime() {
+        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+        return bean.isCurrentThreadCpuTimeSupported() ?
+                bean.getCurrentThreadCpuTime() : 0L;
+    }
+
+    /** Get user time in nanoseconds. */
+    public long getUserTime() {
+        ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
+        return bean.isCurrentThreadCpuTimeSupported() ?
+                bean.getCurrentThreadUserTime() : 0L;
+    }
+
+    /** Get system time in nanoseconds. */
+    public long getSystemTime() {
+        ThreadMXBean bean = ManagementFactory.getThreadMXBean( );
+        return bean.isCurrentThreadCpuTimeSupported( ) ?
+                (bean.getCurrentThreadCpuTime() - bean.getCurrentThreadUserTime( )) : 0L;
     }
 }
