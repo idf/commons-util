@@ -210,12 +210,12 @@ public class IOHandler {
      */
     // Template for catch error in lambda
     private Function<BufferedReader, String> f =
-            (BufferedReader b) -> {
-                try {
-                    return b.readLine();
-                }
-                catch(IOException e) {
-                    throw new RuntimeException(e);
-                }
-            };
+        (BufferedReader b) -> {
+            try {
+                return b.readLine();
+            }
+            catch(IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
 }
