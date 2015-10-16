@@ -2,9 +2,11 @@ package io.deepreader.java.commons.util.collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -43,6 +45,18 @@ public class CollectionSample {
 
         List<Integer> convert(Integer[] array) {
             return Arrays.asList(array);
+        }
+
+        /**
+         * All sorting are in-place
+         */
+        void sorted(List<Integer> lst) {
+            lst.sort((o1, o2) -> o1-o2);
+            Collections.sort(lst);
+        }
+
+        void reverse(List<Integer> lst) {
+            Collections.reverse(lst);
         }
 
         void stream(List<Integer> lst) {
@@ -108,10 +122,17 @@ public class CollectionSample {
             s.toUpperCase();
             s.endsWith("fg");
             s.startsWith("ab");
-
             s.length();
+
+            s.split(" ");
+            s.split("\\w");
         }
 
+        /**
+         * To process the string, toCharArray enables [] and simpler comparsion
+         * @param s
+         * @return
+         */
         char[] convert(String s) {
             return s.toCharArray();
         }
@@ -123,6 +144,35 @@ public class CollectionSample {
         void stream(String s) {
             s.chars().forEach(e -> System.out.println((char) e));
             s.chars().mapToObj(e -> String.valueOf((char) e)).collect(Collectors.joining());
+        }
+    }
+
+    class TwoDimArray {
+        void TwoDimListOperations() {
+            List<List<Character>> mat = new ArrayList<>();
+            mat.add(Arrays.asList(new Character[]{'a', 'b'}));
+            mat.add(Arrays.asList('a', 'b'));
+        }
+
+        char[][] construct() {
+            return new char[][] {
+                    {'1', '1', '0', '1'},
+                    {'1', '1', '0', '1'},
+                    {'1', '1', '1', '1'},
+            };
+        }
+    }
+
+    class PriorityQueueSample {
+        /**
+         * PriorityQueue is ADT; heap is an implementation of PriorityQueue.
+         */
+        void operations() {
+            PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2-o1); // max-heap
+            pq.add(1);  // same as offer
+            pq.offer(1);
+            pq.peek();
+            pq.poll();
         }
     }
 }
