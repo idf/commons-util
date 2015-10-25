@@ -47,6 +47,10 @@ public class CollectionSample {
             return Arrays.asList(array);
         }
 
+        List<Integer> construct() {
+            return Arrays.asList(1, 2, 3);
+        }
+
         /**
          * All sorting are in-place
          */
@@ -120,6 +124,7 @@ public class CollectionSample {
             s.contains("a");
             s.toLowerCase();
             s.toUpperCase();
+            s.substring(0, 1);
             s.endsWith("fg");
             s.startsWith("ab");
             s.length();
@@ -147,6 +152,9 @@ public class CollectionSample {
         }
     }
 
+    /**
+     * Sample Usage of TwoDim Array/List
+     */
     class TwoDimArray {
         void TwoDimListOperations() {
             List<List<Character>> mat = new ArrayList<>();
@@ -163,6 +171,10 @@ public class CollectionSample {
         }
     }
 
+
+    /**
+     * Sample Usage of PriorityQueue
+     */
     class PriorityQueueSample {
         /**
          * PriorityQueue is ADT; heap is an implementation of PriorityQueue.
