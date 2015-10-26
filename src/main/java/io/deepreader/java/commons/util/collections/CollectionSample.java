@@ -74,7 +74,7 @@ public class CollectionSample {
      * @param <K>
      * @param <V>
      */
-    class MapSample<K, V> {
+    static class MapSample<K, V> {
         void mapOperations() {
             Map<String, Integer> m = new HashMap<>();
             // element-wise
