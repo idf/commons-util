@@ -10,8 +10,13 @@ public class AdvancedCollectionSample {
 
     void treeSet() {
         TreeSet<Integer> s = new TreeSet<>();
-        s.floor(1);
-        s.ceiling(1);
+        int ret  = 0;
+        try { ret = s.floor(1); }
+        catch (NullPointerException e) {}
+
+
+        try{ ret = s.ceiling(1); }
+        catch (NullPointerException e) {}
     }
 
     void treeMap() {
