@@ -24,7 +24,6 @@ public class AnnotationSample {
     public @interface Test {
         // whether should ignore this test?
         public boolean enabled() default true;
-
     }
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -51,7 +50,6 @@ public class AnnotationSample {
             if (true) {
                 throw new RuntimeException("This test always failed");
             }
-
         }
 
         @Test(enabled = false)
