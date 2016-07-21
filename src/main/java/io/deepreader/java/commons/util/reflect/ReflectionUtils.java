@@ -1,4 +1,4 @@
-package io.deepreader.java.commons.util;
+package io.deepreader.java.commons.util.reflect;
 
 /**
  * Created by Daniel on 10/08/15.
