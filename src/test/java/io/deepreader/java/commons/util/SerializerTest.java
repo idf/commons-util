@@ -21,6 +21,9 @@ public class SerializerTest extends TestCase {
     }
 
     @Test
+    // This test fails. 
+    //Failed tests: testSerialize(io.deepreader.java.commons.util.SerializerTest):
+    //expected:<[0[.00000,1.00000,2.]00000]> but was:<[0[,00000,1,00000,2,]00000]>
     public void testSerialize() throws Exception {
         Double[] arr = new Double[] {0.0, 1.0, 2.0};
         assertEquals("[0.00000,1.00000,2.00000]", Serializer.serialize(arr));
