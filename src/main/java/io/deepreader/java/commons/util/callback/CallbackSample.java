@@ -21,6 +21,10 @@ public class CallbackSample {
         public MyForm(){
             MyClass myClass = new MyClass();
             myClass.addCallback(this);
+
+            myClass.addCallback(() -> {
+                System.out.println("Called lambda");
+            });
         }
 
         public void call(){
